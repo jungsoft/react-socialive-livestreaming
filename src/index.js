@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import 'video-react/dist/video-react.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
