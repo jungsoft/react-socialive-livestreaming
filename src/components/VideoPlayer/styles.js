@@ -9,7 +9,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     marginTop: theme.spacing(4),
-  }
+  },
+  iFrame: {
+    border: "none",
+    width: 1,
+    minWidth: "100%",
+    minHeight: 500,
+  },
 }));
 
 export default useStyles;

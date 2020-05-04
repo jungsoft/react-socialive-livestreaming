@@ -4,28 +4,38 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-import { Player } from 'video-react';
+import IframeResizer from 'iframe-resizer-react';
+
 import useStyles from "./styles";
 
-const DEFAULT_VIDEO_URL = "https://sl-recording-clips.s3.amazonaws.com/317f64be5bee0e32_720p_27664976665131427.mp4";
+const DEFAULT_STREAM_URL = "https://sl-player-host.s3.amazonaws.com/client.html?player=3e794f71744bd1c7";
 
 function VideoPlayer () {
   const classes = useStyles();
 
-  const [inputValue, setInputValue] = useState(DEFAULT_VIDEO_URL);
-  const [videoUrl, setVideoUrl] = useState(DEFAULT_VIDEO_URL);
+  const [videoStreamUrl, setVideoStreamUrl] = useState(DEFAULT_STREAM_URL);
+  const [inputValue, setInputValue] = useState(DEFAULT_STREAM_URL);
 
   const handleLoadVideoFromUrl = () => {
-    setVideoUrl(inputValue);
+    setVideoStreamUrl(inputValue);
   };
 
   return (
     <Grid container>
-      <Grid item xs={12}>
-        <Player>
-          <source src={videoUrl} />
-        </Player>
-      </Grid>
+      {
+        videoStreamUrl && (
+          <Grid item xs={12}>
+            <IframeResizer
+              src={videoStreamUrl}
+              className={classes.iFrame}
+              heightCalculationMethod="taggedElement"
+              title="Video player"
+              scrolling="no"
+              log
+            />
+          </Grid>
+        )
+      }
 
       <Grid item xs={12} className={classes.inputRow}>
         <TextField
